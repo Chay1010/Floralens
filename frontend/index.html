@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FloraLens — AI Plant & Flower Scanner</title>
+    <meta name="description" content="Identify any plant or flower instantly with AI. Upload a photo and get accurate species identification powered by deep learning.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated background particles -->
+    <div class="bg-particles" id="bgParticles"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand">
+            <span class="nav-icon">🌿</span>
+            <span class="nav-title">FloraLens</span>
+        </div>
+        <div class="nav-links">
+            <a href="#scanner" class="nav-link">Scanner</a>
+            <a href="#how-it-works" class="nav-link">How it Works</a>
+            <a href="#about" class="nav-link">About</a>
+        </div>
+        <div class="nav-status" id="navStatus">
+            <span class="status-dot"></span>
+            <span class="status-text">Checking API...</span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="badge-icon">✨</span>
+                <span>AI-Powered Plant Identification</span>
+            </div>
+            <h1 class="hero-title">
+                Discover Any Plant
+                <span class="title-gradient">In Seconds</span>
+            </h1>
+            <p class="hero-subtitle">
+                Upload a photo of any flower or plant and our deep learning model 
+                will identify the species with remarkable accuracy. Powered by EfficientNet-B2 
+                trained on 102 flower species.
+            </p>
+            <div class="hero-actions">
+                <a href="#scanner" class="btn btn-primary" id="heroScanBtn">
+                    <span class="btn-icon">📸</span>
+                    Start Scanning
+                </a>
+                <a href="#how-it-works" class="btn btn-secondary">
+                    Learn More
+                </a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">102</span>
+                    <span class="stat-label">Species</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">89.7%</span>
+                    <span class="stat-label">Accuracy</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <span class="stat-number">&lt;15ms</span>
+                    <span class="stat-label">Latency</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="floating-card card-1">🌸</div>
+            <div class="floating-card card-2">🌻</div>
+            <div class="floating-card card-3">🌺</div>
+            <div class="floating-card card-4">🌷</div>
+            <div class="floating-card card-5">🌹</div>
+        </div>
+    </header>
+
+    <!-- Scanner Section -->
+    <section class="scanner-section" id="scanner">
+        <div class="section-header">
+            <h2 class="section-title">Plant Scanner</h2>
+            <p class="section-subtitle">Drag & drop or click to upload a photo of any plant or flower</p>
+        </div>
+
+        <div class="scanner-container">
+            <!-- Upload Area -->
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-content" id="uploadContent">
+                    <div class="upload-icon">
+                        <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+                            <path d="M32 8L32 40" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <path d="M20 20L32 8L44 20" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 40v8a8 8 0 008 8h32a8 8 0 008-8v-8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <p class="upload-text">Drop your image here</p>
+                    <p class="upload-hint">or click to browse • JPEG, PNG, WebP • Max 10MB</p>
+                    <button class="btn btn-upload" id="browseBtn">
+                        <span class="btn-icon">📁</span>
+                        Browse Files
+                    </button>
+                </div>
+                <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp" hidden>
+                
+                <!-- Preview (hidden until image loaded) -->
+                <div class="preview-container" id="previewContainer" style="display:none;">
+                    <img id="previewImage" class="preview-image" alt="Uploaded plant image">
+                    <button class="btn btn-change" id="changeImageBtn" title="Change image">✕</button>
+                </div>
+            </div>
+
+            <!-- Scan Button -->
+            <button class="btn btn-scan" id="scanBtn" disabled>
+                <span class="btn-icon">🔬</span>
+                <span class="btn-text">Identify Plant</span>
+                <div class="scan-loader" id="scanLoader"></div>
+            </button>
+
+            <!-- Results -->
+            <div class="results-panel" id="resultsPanel" style="display:none;">
+                <div class="results-header">
+                    <h3 class="results-title">🌿 Identification Results</h3>
+                    <div class="inference-badge" id="inferenceBadge"></div>
+                </div>
+                <div class="results-list" id="resultsList"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="how-section" id="how-it-works">
+        <div class="section-header">
+            <h2 class="section-title">How It Works</h2>
+            <p class="section-subtitle">Three simple steps powered by cutting-edge deep learning</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <div class="step-icon">📸</div>
+                <h3 class="step-title">Capture</h3>
+                <p class="step-desc">Take a photo of any flower or plant. Our model works best with close-up shots showing petals, leaves, or the full bloom.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <div class="step-icon">🧠</div>
+                <h3 class="step-title">Analyze</h3>
+                <p class="step-desc">Our EfficientNet-B2 model processes the image in under 15ms, extracting visual features like petal shape, color gradients, and leaf patterns.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <div class="step-icon">🌺</div>
+                <h3 class="step-title">Identify</h3>
+                <p class="step-desc">Get instant results with confidence scores for the top 5 matching species from our database of 102 flower families.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Model Info -->
+    <section class="about-section" id="about">
+        <div class="section-header">
+            <h2 class="section-title">About the Model</h2>
+            <p class="section-subtitle">Technical details of the FloraLens AI engine</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-card">
+                <h3>🏗️ Architecture</h3>
+                <p><strong>EfficientNet-B2</strong> with compound scaling, fine-tuned on Oxford 102 Flowers. 7.8M parameters with transfer learning from ImageNet.</p>
+            </div>
+            <div class="about-card">
+                <h3>📊 Dataset</h3>
+                <p><strong>Oxford 102 Flowers</strong> — 8,189 images across 102 species. Stratified 70/15/15 split with aggressive augmentation (Mixup, ColorJitter, RandomErasing).</p>
+            </div>
+            <div class="about-card">
+                <h3>⚡ Serving</h3>
+                <p><strong>ONNX Runtime</strong> via FastAPI. Dockerized deployment with health checks. 12.3ms mean inference latency on GPU.</p>
+            </div>
+            <div class="about-card">
+                <h3>📈 Performance</h3>
+                <p><strong>89.7% accuracy</strong>, 0.412 val loss. Trained with AdamW (lr=3e-4), cosine annealing, and early stopping (patience=5).</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <span class="nav-icon">🌿</span> FloraLens
+            </div>
+            <p class="footer-text">AI Master Track — Université Paris-Saclay</p>
+            <p class="footer-copyright">© 2025 Chay. MIT License.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
