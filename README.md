@@ -66,14 +66,6 @@ Open `frontend/index.html` in your browser or serve with any static file server,
 
 | Model | Val Accuracy | Val Loss | Params | Inference (ms) |
 |-------|-------------|----------|--------|----------------|
-| EfficientNet-B2 (ours) | **89.7%** | 0.412 | 7.8M | 12.3 |
-| ResNet-50 (baseline) | 85.2% | 0.583 | 23.5M | 18.7 |
-| MobileNetV3 (lightweight) | 82.1% | 0.691 | 3.4M | 8.1 |
-
-## 📝 License
-
-MIT License — see [LICENSE](LICENSE).
-
-## 👤 Author
-
-Chay — chay101045@gmail.com
+| EfficientNet-B2 | **89.7%** | 0.412 | 7.8M | 12.3 |
+| ResNet-50 | 85.2% | 0.583 | 23.5M | 18.7 |
+| MobileNetV3 | 82.1% | 0.691 | 3.4M | 8.1 |
