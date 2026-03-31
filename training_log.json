@@ -1,0 +1,7 @@
+{
+  "best_val_loss": 0.8460124680584339,
+  "best_val_acc": 0.992671009771987,
+  "total_epochs": 25,
+  "total_time_minutes": 38.65832810004552,
+  "final_log_line": "Epoch 25 | val_loss=0.8889 | val_acc=0.9910"
+}
