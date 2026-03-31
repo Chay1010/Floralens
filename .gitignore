@@ -16,3 +16,4 @@ wandb/
 *.log
 .vscode/
 .idea/
+.sfdx/
