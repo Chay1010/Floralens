@@ -3,7 +3,6 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
 [![PyTorch](https://img.shields.io/badge/PyTorch-2.1+-red.svg)](https://pytorch.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 FloraLens is an end-to-end deep learning application that identifies plant species from photographs.  
 It uses a fine-tuned **EfficientNet-B2** on the **Oxford 102 Flowers** dataset, served via a **FastAPI** backend with **ONNX Runtime** inference, and a modern responsive web frontend.
